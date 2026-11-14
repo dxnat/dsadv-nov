@@ -24,6 +24,7 @@ import {
   DialogTrigger,
   type DialogSize,
 } from "@/components/ui/Dialog"
+import { FundCard, type FundCardProps } from "@/components/ui/FundCard"
 import { Input } from "@/components/ui/Input"
 import { Label } from "@/components/ui/Label"
 
@@ -44,6 +45,38 @@ const dialogSizes: { value: DialogSize; label: string }[] = [
   { value: "default", label: "ปกติ (default)" },
   { value: "lg", label: "ใหญ่ (lg)" },
   { value: "xl", label: "ใหญ่พิเศษ (xl)" },
+]
+
+const priceDate = new Date(2026, 10, 13)
+
+const fundOptions: FundCardProps[] = [
+  {
+    name: "อนุรักษ์นิยม (Conservative)",
+    manager: "ซิดนีย์ฮาร์เบอร์ แอสเซ็ท แมเนจเมนต์",
+    unitPrice: 1.2045,
+    priceDate,
+    image: { src: "/funds/conservative.svg", alt: "ภาพประกอบคลื่นทะเลสงบ" },
+  },
+  {
+    name: "สมดุล (Balanced)",
+    manager: "เซาเทิร์นครอส อินเวสเตอร์ส",
+    unitPrice: 1.8342,
+    priceDate,
+    image: { src: "/funds/balanced.svg", alt: "ภาพประกอบแผนภูมิวงกลม" },
+  },
+  {
+    name: "เติบโตสูง (High Growth)",
+    manager: "ยูคาลิปตัส แคปิตอล",
+    unitPrice: 2.4518,
+    priceDate,
+    image: { src: "/funds/high-growth.svg", alt: "ภาพประกอบกราฟแท่งขาขึ้น" },
+  },
+  {
+    name: "ลงทุนอย่างยั่งยืนเพื่อสิ่งแวดล้อมและสังคม (Sustainable ESG Growth)",
+    manager: "แทสมัน ซัสเทนเนเบิล อินเวสต์เมนต์ส",
+    unitPrice: 1.5527,
+    priceDate,
+  },
 ]
 
 export default function Page() {
@@ -190,6 +223,23 @@ export default function Page() {
             </div>
           </Field>
         </div>
+      </Section>
+
+      {/* ---------- FundCard ---------- */}
+      <Section
+        title="การ์ดกองทุน (FundCard)"
+        description="props: name, manager, unitPrice, priceDate?, image?"
+      >
+        <Demo
+          label="ทางเลือกการลงทุน (ใบสุดท้ายไม่มีรูป และชื่อยาว)"
+          stacked={false}
+        >
+          <div className="grid w-full grid-cols-2 gap-4 sm:grid-cols-4">
+            {fundOptions.map((fund) => (
+              <FundCard key={fund.name} {...fund} />
+            ))}
+          </div>
+        </Demo>
       </Section>
 
       {/* ---------- Dialog ---------- */}
